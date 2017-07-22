@@ -1,4 +1,4 @@
-multiloc.LD<-function(df, var=c(D), loci=c(1,2)){
+multiloc.LD<-function(df, out=c(D), loci=c(1,2), warn=TRUE){
   if (length(loci) == 2) {
     offspring_sub<-select(df, loci)
     p.a<-sum(offspring_sub[,1])/(dim(df)[1]) #probability of having A allele
@@ -57,6 +57,6 @@ multiloc.LD<-function(df, var=c(D), loci=c(1,2)){
     r<-D/sqrt(p.a*(1-p.a)*p.b*(1-p.b)*p.c*(1-p.c)*p.d*(1-p.d)*p.e*(1-p.e)) #correlation coefficient
   } else {var<-"Linkage can only be calculated for between 0 and 5 loci. Please adjust 'loci'. Default includes loci 1 and 2"}
 
-  out<-var
-  return(out)
+  output<-c(out, "Disequilibrium coefficients calculated for more than three loci are not corrected.")
+  return(output)
 } #end function
